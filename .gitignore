@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__
+data/
+outputs/
+pretrained/
+wandb/
+finetuned/
+slurm_outputs/
+slurm_scripts/
+results/
