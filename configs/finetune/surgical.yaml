@@ -1,0 +1,5 @@
+_target_: src.finetune.surgical.SurgicalFinetuning
+train_last_layer: true
+train_layer_norm: true
+train_batch_norm: true
+target_modules: []  # List of target modules to be fine-tuned, if any

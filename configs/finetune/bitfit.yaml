@@ -1,0 +1,2 @@
+_target_: src.finetune.bitfit.BitFit
+target_modules: # List of target modules to be fine-tuned, if any

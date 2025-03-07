@@ -1,0 +1,12 @@
+adapter:
+  _target_: src.finetune.gconv_adapter.GConvAdapter
+  bottleneck_size: 16
+  conv_type: gcn
+  learnable_scalar: true
+  non_linearity: relu
+  normalization: none
+  normalize: false
+  skip_connection: true
+positions:
+- pre
+type: sequential

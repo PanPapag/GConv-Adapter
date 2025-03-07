@@ -1,0 +1,100 @@
+defaults:
+  - _self_
+  - finetune/full
+
+# Directory where output will be saved
+hydra:
+  run:
+    dir: ${hydra:runtime.cwd}/outputs/${now:%Y-%m-%d/%H-%M-%S}
+
+# General WandB settings
+wandb:
+  project: "Thesis-Transductive-Learning"
+  # project: ""
+  name: ""
+  tags: []
+  notes: ""
+
+seed: 0 
+
+# Dataset-related settings
+dataset:
+  name: cora
+  sub_dataset: ""
+  data_dir: data/
+
+# Training settings
+training:
+  epochs: 300
+  eval_step: 1
+  train_prop: 0.5
+  valid_prop: 0.25
+  rand_split: true
+  rand_split_class: false
+  label_num_per_class: 20
+  protocol: semi
+  save_model: true
+  model_dir: finetuned
+  pretrained_model: ""
+  # pretrained_model: pretrained/ogbn-arxiv-nodeformer.pkl # Path to the pretrained model
+
+# Device settings
+device:
+  cpu: false
+  device_id: 0  # Use GPU device ID if any (default: 0)
+
+# Model settings - NodeFormer
+model:
+  method: nodeformer
+  hidden_channels: 32
+  num_layers: 2
+  num_heads: 1
+  M: 30
+  use_gumbel: true
+  use_residual: true
+  use_bn: true
+  use_act: false
+  use_jk: false
+  K: 10
+  tau: 0.25
+  lamda: 1.0
+  rb_order: 2
+  rb_trans: sigmoid
+  batch_size: 10000
+  dropout: 0.0
+  lr: 0.001
+  weight_decay: 5e-3
+
+# Model settings - DIFFormer-s
+# model:
+#   method: difformer
+#   hidden_channels: 64
+#   num_layers: 8       
+#   num_heads: 1   
+#   alpha: 0.5          
+#   use_bn: true       
+#   use_residual: true 
+#   use_graph: true   
+#   use_weight: false  
+#   kernel: simple    
+#   dropout: 0.2
+#   weight_decay: 0.01
+#   lr: 0.001  
+#   batch_size: 10000
+
+# Metric settings
+metric:
+  name: acc
+
+# GNN Baseline settings
+gnn_baseline:
+  hops: 1
+  cached: false
+  gat_heads: 8
+  out_heads: 1
+  projection_matrix_type: true
+  lp_alpha: 0.1
+  gpr_alpha: 0.1
+  directed: false
+  jk_type: max
+  num_mlp_layers: 1

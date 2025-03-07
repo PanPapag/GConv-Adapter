@@ -1,0 +1,5 @@
+adapter: 
+  _target_: src.finetune.adapter_gnn.AdapterGNN
+  bottleneck_size: 8
+positions: ['pre', 'post']
+type: parallel

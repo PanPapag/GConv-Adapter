@@ -1,0 +1,5 @@
+adapter: 
+  _target_: src.finetune.g_adapter.GAdapter
+  bottleneck_size: 8
+positions: ['post']
+type: sequential

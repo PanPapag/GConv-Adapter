@@ -1,0 +1,47 @@
+defaults:
+  - _self_
+  - finetune/full
+
+hydra:
+  run:
+    dir: ${hydra:runtime.cwd}/outputs/${now:%Y-%m-%d/%H-%M-%S}
+
+wandb: 
+  project: ""
+  name: 
+  tags: 
+  notes:
+
+seed: 0
+
+dataset:
+  base_dir: data
+  name: esol
+  
+split:
+  _target_: 
+  null_value: 0
+  frac_train: 0.8
+  frac_valid: 0.1
+  frac_test: 0.1
+
+dataloader:
+  batch_size: 32
+
+model:
+  _target_: src.models.inductive.gnn.MolecularGraphPredictionModel
+  num_layers: 5
+  emb_dim: 300
+  dropout: 0.5
+  pooling_method: mean
+  jk_mode: last
+  gnn_type: gin
+
+training:
+  epochs: 100
+  lr: 0.001
+  lr_scale: 1
+  weight_decay: 0
+  early_stopping_patience: 20
+
+pretrained_model: pretrained/chem_gin_supervised_contextpred.pth

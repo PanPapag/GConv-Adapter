@@ -1,0 +1,49 @@
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: ${hydra:runtime.cwd}/outputs/${now:%Y-%m-%d/%H-%M-%S}
+
+random_state: 42
+
+dataset:
+  _target_: torch_geometric.datasets.PPI
+  root: ${hydra:runtime.cwd}/data
+  name: Cora
+
+descriptors:
+  degree_distribution:
+    _target_: src.graphs.descriptors.degree_distribution
+    density: True
+  clustering_coefficient:
+    _target_: src.graphs.descriptors.clustering_coefficient
+    density: True
+  normalised_laplacian_spectrum:
+    _target_: src.graphs.descriptors.normalised_laplacian_spectrum
+    density: True
+  closeness_centrality_distribution:
+    _target_: src.graphs.descriptors.closeness_centrality_distribution
+    density: True
+  degree_centrality_distribution:
+    _target_: src.graphs.descriptors.degree_centrality_distribution
+    density: True
+  eigenvector_centrality_distribution:
+    _target_: src.graphs.descriptors.eigenvector_centrality_distribution
+    density: True
+  neighbor_degree_distribution:
+    _target_: src.graphs.descriptors.neighbor_degree_distribution
+    density: True
+  degree_connectivity_distribution:
+    _target_: src.graphs.descriptors.degree_connectivity_distribution
+    density: True
+  path_length_distribution:
+    _target_: src.graphs.descriptors.path_length_distribution
+    density: True
+  connected_components_size_distribution:
+    _target_: src.graphs.descriptors.connected_components_size_distribution
+    density: True
+    
+plot:
+  show: False
+  save: True
